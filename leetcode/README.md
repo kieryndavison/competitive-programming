@@ -124,7 +124,7 @@ Get, set and setAll in o(1)
 - To calculate the product of all elements that occur before/after the given element in the array we keep a running product 
 - At each iteration we multiply the element in the result array by this running product
 - Then we multiply the running total by the current element in the array
-## 560.Subarrat Sum Equals K
+## 560. Subarray Sum Equals K
 - Based on the idea that sum(i,j) = sum(0, j) - sum(0, i - 1)
 - To compute this we have a dictionary which contains all the pre-sums aka sum(0, i - 1)
 - Each time we go through the loop if sum(0, j) aka curSum - sum(i,j) aka k, is in the presum dictionary then we add the frequency of sum(0, i-1) to the res
@@ -164,4 +164,4 @@ Get, set and setAll in o(1)
     - Since we are going through the words j = len(word)
     - Everything else is the same
 ## 67. Add Binary
-- Basically the same as [415. Add Strings](##-415.-Add-Strings), only difference is we are working with base 2 rather than base 10 so we mod and divide by 2 rather than 10
+- Basically the same as [415. Add Strings](#415.-Add-Strings), only difference is we are working with base 2 rather than base 10 so we mod and divide by 2 rather than 10
