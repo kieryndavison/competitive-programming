@@ -164,4 +164,4 @@ Get, set and setAll in o(1)
     - Since we are going through the words j = len(word)
     - Everything else is the same
 ## 67. Add Binary
-- Basically the same as [415. Add Strings](## 415. Add Strings), only difference is we are working with base 2 rather than base 10 so we mod and divide by 2 rather than 10
+- Basically the same as [415. Add Strings](##-415.-Add-Strings), only difference is we are working with base 2 rather than base 10 so we mod and divide by 2 rather than 10
