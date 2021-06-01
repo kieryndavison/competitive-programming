@@ -119,3 +119,49 @@ Get, set and setAll in o(1)
 - Add the sum mod 10 to a list which holds all the values computed
 - After the loop add the carry to the list if its > 0
 - Convert the list to a string and reverse it (has to be reversed since we were always adding to the back of the list)
+## 238. Product of Array Except Self
+- This is done in two passes first we calculate the product of all the elements that occur before each element in the array and then we multiply this by the product of all the elements that occur after each element in the array
+- To calculate the product of all elements that occur before/after the given element in the array we keep a running product 
+- At each iteration we multiply the element in the result array by this running product
+- Then we multiply the running total by the current element in the array
+## 560.Subarrat Sum Equals K
+- Based on the idea that sum(i,j) = sum(0, j) - sum(0, i - 1)
+- To compute this we have a dictionary which contains all the pre-sums aka sum(0, i - 1)
+- Each time we go through the loop if sum(0, j) aka curSum - sum(i,j) aka k, is in the presum dictionary then we add the frequency of sum(0, i-1) to the res
+- We have to add to the frequency since we can have negative numbers which means that we can have the same sum twice 
+- Have to start with {0: 1} in the map for the case where curSum == k
+## 270. Closeet Binary Search Tree Value
+- Similar to normal binary search for target, except we keep track of the element that is the closest to the target and update it as we go
+## 523. Continuous Subarray Sum
+- Similar to other problems like this for example 560
+- Main difference is since the subarray can add up to any multiple of k we use mod to optimize the solution
+- We loop through the numbers in the array adding them to a prefix sum
+- Each time we add to the prefix sum we also mod it by k so that the value stays between 0 and k
+- If the prefix sum value has been seen before (i.e. is in the dictionary) and the index of the previous prefix sum is > 1 before the current index then we return true
+- Otherwise we add the current prefix sum and the current index to the dictionary 
+## 515. Find Largest Value In Each Tree Row
+- Use either BFS or DFS
+- BFS: 
+    - keep track of all the elements in current row
+    - While there is still non-null elements in a row 
+    - Compute the max of the row and add it to the result list
+    - And update the row to be the next row of non-null elements
+- DFS:
+    - Normal pre-order traversal but keep track of the level and update the result list
+    - If the size of the result array is equal to the level (aka first element in a row) then add the element to the result list
+    - Otherwise update the result list a the current level index to be the maximum of the current node’s values and its value
+    - Recurse on the left and right trees, with level = level + 1
+    - Return when node is None
+## 139. Word Break
+- 2 possible methods second is slightly optimized since we only consider substrings that have the length of words in the dictionary
+- Method 1
+    - Use dp, go through all possible final indices of the substring + 1 (i.e. 1… len(s))
+    - Then for each i value go through from 0 … I-1
+    - If dp[j] and s[j:i] is in the dictionary then set dp[I] to true (start with dp[0] = true) and break
+    - Return dp[-1] 
+- Method2 
+    -  Similar to method 1 but instead for trying all possible substring for 0…I-1 for each I value we go through all words in the dictionary for each I value 
+    - Since we are going through the words j = len(word)
+    - Everything else is the same
+## 67. Add Binary
+- Basically the same as [415. Add Strings](## 415. Add Strings), only difference is we are working with base 2 rather than base 10 so we mod and divide by 2 rather than 10
