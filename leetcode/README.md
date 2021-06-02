@@ -157,7 +157,7 @@ Get, set and setAll in o(1)
 - Method 1
     - Use dp, go through all possible final indices of the substring + 1 (i.e. 1… len(s))
     - Then for each i value go through from 0 … I-1
-    - If dp[j] and s[j:i] is in the dictionary then set dp[I] to true (start with dp[0] = true) and break
+    - If dp[j] and s[j:i] is in the dictionary then set dp[i] to true (start with dp[0] = true) and break
     - Return dp[-1] 
 - Method2 
     -  Similar to method 1 but instead for trying all possible substring for 0…I-1 for each I value we go through all words in the dictionary for each I value 
@@ -165,3 +165,13 @@ Get, set and setAll in o(1)
     - Everything else is the same
 ## 67. Add Binary
 - Basically the same as [415. Add Strings](#415-Add-Strings), only difference is we are working with base 2 rather than base 10 so we mod and divide by 2 rather than 10
+## 314. Binary Tree Vertical Order Traversal 
+- The main idea for this algorithm is to use BFS and store both the node and the colum value for each node in the tree
+- We also keep track of the minimum and maximum column value that we have seen so far as an optimization so we dont have to sort the lists of values at the end based on their column value
+- We keep store all the values in the tree in a dictionary with the key being the column value and value being the list of node values at that column index
+## 528. Random Pick with Weight
+- In the init function we create and store a prefix array for each index
+- In the pick index function we generate a random number between 1 and the total sum of all the weights (i.e. prefixSum[-1]) and then binary search for that value in the array
+- In the end we return low
+## 1762. Buildings With an Ocean View 
+- Simple O(n) solution, just iterate through the array in reverse and keep track of the tallest building you have seen so far
