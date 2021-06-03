@@ -175,3 +175,10 @@ Get, set and setAll in o(1)
 - In the end we return low
 ## 1762. Buildings With an Ocean View 
 - Simple O(n) solution, just iterate through the array in reverse and keep track of the tallest building you have seen so far
+## 426. Convert Binary Search Tree to Sorted Doubly Linked List
+- Use a typical in order traversal, but keep track of the previous and head nodes
+- If the previous node is None then we have found the head node so update the head value to point to the current node
+- Otherwise update the left node of the current node to be the previous node and the right node of the previous node to be the current node 
+- Then update the previous node to be the current node
+- After the recursion is complete then close the loop by updating the left pointer for the head node the point to the last node (i.e. the current previous) and update the right pointer for the previous to be the head node
+- Then return the head node
