@@ -182,3 +182,40 @@ Get, set and setAll in o(1)
 - Then update the previous node to be the current node
 - After the recursion is complete then close the loop by updating the left pointer for the head node the point to the last node (i.e. the current previous) and update the right pointer for the previous to be the head node
 - Then return the head node
+## 605. Can place flowers
+- For each element in the array:
+    - If it is a 0 check if the one directly to its right and left is also 0 (if they exist)
+    - If it is set the current element to 1 and update the number of flowers counter 
+    - Then if the counter is greater than the number of flowers we want to plant (n) then return true
+- If we go through the entire loop without returning then return false
+- Edge case: first and last elements, for the first one only check the right side and for the last only check the left
+## 31. Next Permuation
+- Three step algorithm
+- First find the first element that is smaller than the one that comes before it, lets call it element a
+- Then find the first element that comes before element a that is smaller than it, say element b, then swap element a with elment b
+- Finally, reverse the number from the one after the original index of element a to the end 
+## 200. Number of Islands
+- For each element in the array, if it is a 1 then increment the island counter by 1 and dfs on the array from the element to set all 1s in the island to 0 / #
+- In the dfs we recurse on up, down, left and right elements in the 2d array setting each element to 0 / # and return when we find a element that is not 1 or reach the bounds of the 2d array
+## 582. Kill Process
+- Prerocess the arrays and make a dictionary that maps each process to its direct children
+- Then preform a dfs starting from the process to kill and at each iteration add the popped element to the result and then add all its children to the queue
+## 1283. Find the smallest divisor given a threshold
+- Use binary search, low = 1, high = max of the numbers in the array
+- In each iteration 
+    - Calculate the sum for the mid point, by adding the ceiling of each element divided by the divisor to the sum
+    - Can take the ceiling by doing (num + divisor - 1) // divisor
+    - If the sum is greater than the threshold then we want a larger divisor so we set low = mid + 1
+    - Otherwise we want a smaller divisor so we set high = mid - 1
+- In the end we return low
+## 1419. Minumum Number of Frogs Croaking
+- Use a state machine
+- Represent state machine as dictionary where each character is mapped to the number of times it occured, or the number of croaks that are currently on that letter
+- To avoid repeated code also create a map which maps each character to the one that should come before it
+- In each iteration 
+    - Update the the map at the current letter
+    - If the character is a c then update the counter for the number of frogs that are currents croaking and the max
+    - If the count of the previous letter is 0 the return -1 since the letters are out of order
+    - Otherwise update the count of the previous letter
+    - If we are at the last letter in the word then update the counter for the number of frogs that are currently croaking
+- In the end if there are no frogs currently croaking then return the max
