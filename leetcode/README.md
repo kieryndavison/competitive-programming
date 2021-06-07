@@ -219,3 +219,33 @@ Get, set and setAll in o(1)
     - Otherwise update the count of the previous letter
     - If we are at the last letter in the word then update the counter for the number of frogs that are currently croaking
 - In the end if there are no frogs currently croaking then return the max
+## 696. Count Binary Substrings
+- 2 main parts: 
+    - First we must compute the length of each group of 1s or 0s
+    - Then we calculate the number of substrings we can produce by taking the minimum of the length of the current substring and the previous
+- Version 1:
+    - Can do this in one pass by keeping previous, and current counters
+    - If the current character is equal to the previous one then we increment the current counter
+    - Otherwise, we add to the result the minimum of the previous and current group lengths and set current back to 1 and previous to current
+    - In the end we also have to add the min of the previous and current groups to the result to account for the last groups in the string
+- Version 2:
+    - Add in spaces between all the groups 0s and 1s and then split the string on the spaces and calculate the len of each group
+    - Then go through the array of the group lengths and the array without the first element (using zip) and take the minimum of the first and second array values and add it to the running sum
+    - return the running sum at the end
+    - This used O(n) space and 2 passes but it uses more of pythons built in functionality 
+## 243. Shortest Word Distance
+- Keep track of the most recent index of each word in the list
+- If both words have been seen then update the minimum distance to be the minimum of its current value and the current distance between the two words
+- Return the minimum distance variable in the end
+## 225. Implement Stack Using Queues
+- Make push O(n) since both pop and top require the queue to be in reverse order
+- Each time an element is added to the queue then pop and append all elements again
+- All other methods are trivial
+- Only requires 1 queue, since we pop and append to the same queue again
+## 496. Next Greater Element I
+- Preprocess the second array first to optimize the solution
+- Use a stack and dictionary to store each value and its next greater element:
+    - Push all elements on the stack 
+    - While the element is greater than the element on the top of the stack pop elements from the stack and add the popped element to the dictionary with a value of the current element
+- Then go through the first array and add the value for each number to the result array
+- Return the result array
