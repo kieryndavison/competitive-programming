@@ -17,5 +17,5 @@ class Solution:
             # add each element we see to the map, with its value being its most recent index
             mapIndex[s[i]] = i
 
-        # handle the case were the longest substring goest to the end of the array
+        # handle the case were the longest substring goes to the end of the array
         return max(maxLen, len(s) - start)

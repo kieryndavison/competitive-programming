@@ -249,3 +249,21 @@ Get, set and setAll in o(1)
     - While the element is greater than the element on the top of the stack pop elements from the stack and add the popped element to the dictionary with a value of the current element
 - Then go through the first array and add the value for each number to the result array
 - Return the result array
+## 1309. Minimum Difference Betweet Largest and Smallest Value in Three Moves
+- We know that if there are less than 5 elements in the array then the difference is 0 since we can set all elments to the same value in 3 moves.
+- Otherwise, there are 4 options to consider: 
+1. Removing largest 3 elements
+2. Removing smallest element and largest 2 elements
+3. Removing smallest 2 elements and largest element
+4. Removing smallest 3 elements
+- For each case the difference between the largest and smallest values in the array is:
+1. The 4th largest elment - the smallest element 
+2. The 3rd largest element - 2nd smallest element
+3. The 2nd largest element - 3rd smallest element
+4. The largest element - 4th smallest element
+- So we need to find the 4 largest and 4 smallest elements and then subtract them from eachother to find the minimum difference.
+## 1048. Longest String Chain
+- DP solution
+- Sort array of words by length
+- Go through the sorted array and for each word try removing each character to create a word2
+- The length of the chain = length(word) = max(length(word), length(word2) + 1)
