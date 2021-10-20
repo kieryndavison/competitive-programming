@@ -267,3 +267,16 @@ Get, set and setAll in o(1)
 - Sort array of words by length
 - Go through the sorted array and for each word try removing each character to create a word2
 - The length of the chain = length(word) = max(length(word), length(word2) + 1)
+## 735. Asteroid Collision
+- There will be a collision if there is a positive integer to the left of a negative integer
+- Keep a stack of all the values seen so far
+- While the current value is negative and the value at the top of the stack is positive 
+    - If the negative of the current value is greater than the value on the top of the stack then pop from the stack
+    - If the negative of the current value equals the value at the top of the stack then pop from the stack and break from the loop
+    - If the negative of the current value is less than the value at the top of the stack then break from the loop
+- Otherwise add the current value to the stack
+## 1277. Count Square Submatrices with All Ones
+- Use dp
+- If the cell has value 1 then the number of square submatrices that can be made using all the cells up to that point is equal to the min(matrix[i-1][j], matrix[i][j-1], matrix[i-1][j-1]) + 1
+- If i == 0 or j == 0 and the cell have value 1 then the number of square submatrices that can be made is equal to 1
+- The total number of square submatrices that can be made is equal to the sum of the values computed for each cell in the array
