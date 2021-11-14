@@ -280,3 +280,26 @@ Get, set and setAll in o(1)
 - If the cell has value 1 then the number of square submatrices that can be made using all the cells up to that point is equal to the min(matrix[i-1][j], matrix[i][j-1], matrix[i-1][j-1]) + 1
 - If i == 0 or j == 0 and the cell have value 1 then the number of square submatrices that can be made is equal to 1
 - The total number of square submatrices that can be made is equal to the sum of the values computed for each cell in the array
+## 1525. Number of Good Ways to Split a String
+- Use collections.Counter to create a dictionary mapping each character in the string to how many times it occurs
+- Go through each character in the string and add it to the left side dictionary and remove it from the right side dictionary
+- If the dictionary value at the current character in the right side is 0 then remove it from the dictionary
+- If the length of the left and right dictionary is equal then we have found a split that works since we want the number of distict characters to be the same.
+## 690. Employee Importance
+- Make a dictionary mapping employee id to employee properties
+- Perform dfs on the list of employees, starting from the id given
+- return the sum of the employee importance and all their subordinates importances.
+## 833. Find And Replace in String
+- Key: go through the string in reverse that that you don't have to keep track of the change in indicies 
+- As you go if the source is equal to the string at that index then replace with the target, otherwise leave the string as is
+## 394. Decode String
+- Use a stack or recursion 
+- There are 4 cases:
+1. When you find an opening bracket '[' then recurse, or push to the current sting and multiplier on to the stack
+2. When you find a closing bracket ']' then return or compute the current string (string from the top of the stack + current string times the number from the top of the stack)
+3. When you find a number add it to the current multiplier (multiplier * 10 + int(char))
+4. When you find a letter add it to the current string
+## 42. Trapping Rain Water
+- Use two pointers, and keep track of the left and right max
+- At each iteration of the loop increment the pointer on for whichever side has a lower height, recompute the max for that side and add the difference between the max and the current height to the result 
+- Intuitively, since we are always moving the smaller of the two pointers, there will be a larger bar in the other side (i.e. right). Therfore, we know that the amount of water trapped only depends on the max in the current side (i.e. left).
