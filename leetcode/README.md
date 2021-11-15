@@ -303,3 +303,19 @@ Get, set and setAll in o(1)
 - Use two pointers, and keep track of the left and right max
 - At each iteration of the loop increment the pointer on for whichever side has a lower height, recompute the max for that side and add the difference between the max and the current height to the result 
 - Intuitively, since we are always moving the smaller of the two pointers, there will be a larger bar in the other side (i.e. right). Therfore, we know that the amount of water trapped only depends on the max in the current side (i.e. left).
+## 422. Valid Word Square
+- Straight forward solution, go through the list of words and then go through each character in each word (i.e. character at i, j) and check if it is equal to the character at j, i.
+- If we find a case where the characters are not equal then it is not a square so return false
+- Otherwise return if we complete the loop return true
+- Two edge cases - the index j is larger than the length of the list or the index i is larger than the length of the word at j
+## 425. Word Squares
+- Use a trie - store all prefixes and the words in a dictionary with the prefix as the key and the words as the value (note words can be a set) 
+- Recursively go through all the words an try to create a square with them
+- Note in the prefix trie all words map to "", therfore starting at index 0 with square = [] will recursively try to create squares with all the words
+- Base case: when a square has length n = length of the word
+- Find the prefix for the current square based on the words in the square and then recursively try adding each word with this prefix to the trie
+## 281. Zigzag Iterator
+- Use a queue to store the next value to be returned and its iterator
+- hasNext() checks if the queue is empty
+- next() pops an element from the queue, returns the value poped and re-adds the iterator to the queue
+- In the _insert_in_queue function we try to insert the iterator and its next value into the queue, if an StopIteration exceptions is thrown then we do nothing and the value will not be added to the queue
