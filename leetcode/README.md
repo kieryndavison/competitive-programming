@@ -319,3 +319,15 @@ Get, set and setAll in o(1)
 - hasNext() checks if the queue is empty
 - next() pops an element from the queue, returns the value poped and re-adds the iterator to the queue
 - In the _insert_in_queue function we try to insert the iterator and its next value into the queue, if an StopIteration exceptions is thrown then we do nothing and the value will not be added to the queue
+## 529. Minesweeper
+- Basic DFS/BFS solution, two cases:
+1. If we click a mine then set it to X and return immediately
+2. Otherwise recurse until you find a square that has mines adjacent to it. In each iteration determine the number of adjacent mines, if there is any then set the square the the number of adjacent mines and return. Otherwise set the square to 'B' and recurse on all adjacent squares.
+## 575. Distribute Candies
+- Key: use a set to determine the number of candy types
+- Take the min of the length of the set of candy types and the length of the candy types array divided by 2
+## 300. Longest Increasing Subsequence
+- Intuition: Keep track of the smallest numbers that can go in each position of the subsequence, since you want to know the longest increasing subsequence. The smaller the value the more likely other values will be greater than it
+- Store these values in an array
+- For each element binary search in the array of the smallest numbers and update the value at the index returned to be the current element
+    - This will either update an element in the array to be a smaller value or add a new value to the end of the array.
