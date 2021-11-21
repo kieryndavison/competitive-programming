@@ -331,3 +331,14 @@ Get, set and setAll in o(1)
 - Store these values in an array
 - For each element binary search in the array of the smallest numbers and update the value at the index returned to be the current element
     - This will either update an element in the array to be a smaller value or add a new value to the end of the array.
+## 289. Game of Life
+- Key: use 2 bits, in the first bit store the new value and in the previous bit store the current value. 
+- To start we have dead => 00 and alive => 01, after setting the values there are 4 possible options: 00 (new and current values are dead), 01 (new value is dead, current value is alive), 10 (new value is alive, current value is dead), 11 (new and current values are alive)
+- To get the current value use board[i][j] & 1 - gets the second bit
+- To get the new value use board[i][j] >> 1 - gets the first bit (can also use board[i][j] & 2)
+## 322. Coin Change
+- Use dp - only need to store 1-d array
+- Initialize it to 0 and then the rest infinite 
+- Go through 0 - amount and all coin options
+    - If i >= coin then set the value to be min(dp[i-coin] + 1, dp[i])
+    - dp[i] contains how many coins are needed to make i with the current coin options
