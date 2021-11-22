@@ -342,3 +342,6 @@ Get, set and setAll in o(1)
 - Go through 0 - amount and all coin options
     - If i >= coin then set the value to be min(dp[i-coin] + 1, dp[i])
     - dp[i] contains how many coins are needed to make i with the current coin options
+## 843. Guess the Word
+- Main idea: eliminate any words that do not have the same number of matches as the current word and the secrete word. To do this, at each iteration, go through all the words in the wordlist and only keep the words where the sum of equal characters between the word and the guessed word (guess) is equal to the result of Master.guess(guess).
+- Optimization: consider what value initally guess. For this we want to take the word that overlaps with the most other words in the list. This is because this word is most likely to overlap with the secrete word which helps to narrow down the word list faster. To find the word with the most overlap with other words we find the word with the largest score, where score is equal to the sum of the number of times each character in the word occurs at that position accross all words in the word list. We use a list of dictionaries to store this, where the index in the list repesents the position the character occurs in the word and the dictionary specifies how many times each character occurs at that position.
