@@ -353,3 +353,8 @@ Get, set and setAll in o(1)
 - After computing all the polar angles, sort them and then add each angle * 2pi to the array so points in the 1st quadrant can be included in fields of view starting the the 4th quadrant. Also make sure to convert the angle given to radians so that it will be compared properly to the angles computed from the points.
 - Finally, use 2 pointers to determine the max number of points that can be contained in a field of view. Start with start and end = 0, go through each element in the array and update start to ensure that angles[end] - angles[start] <= angle (use while loop inside for loop). Update the result at each iteration to be the difference between the start and end index + 1
 - Return the result + the number of points that are the same as the location point
+## 68. Text Justification
+- Not much tricks here just go through the array of words and keep track of the words and how many characters are in the current line.
+- Once you find that adding the current word would exceed the maxWidth for a line create a line and add it to the result
+- In order to correctly distribute spaces we can use a round robbin method where we go through each value from 0 to the number of spaces we need to insert to get length of the line = maxWidth (aka maxWidth - number of characters in the line). We add the space to the word at index i % the number of places we have to insert spaces in. This ensures that the spaces are evenly distributed and any extra spaces are added to the leftmost slots.
+- After the outer loop we add the last line to the result and left justify it.
