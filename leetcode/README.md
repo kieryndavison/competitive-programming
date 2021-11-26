@@ -358,3 +358,20 @@ Get, set and setAll in o(1)
 - Once you find that adding the current word would exceed the maxWidth for a line create a line and add it to the result
 - In order to correctly distribute spaces we can use a round robbin method where we go through each value from 0 to the number of spaces we need to insert to get length of the line = maxWidth (aka maxWidth - number of characters in the line). We add the space to the word at index i % the number of places we have to insert spaces in. This ensures that the spaces are evenly distributed and any extra spaces are added to the leftmost slots.
 - After the outer loop we add the last line to the result and left justify it.
+## 981. Time Based Key-Value Store
+- Use a hashmap to store the key and a list of pairs (timestamp, value)
+- When a get request is made we binary search on the list of pairs and return the value of the pair with the largest timestamp that is less than or equal to the current timestamp
+- We can use binary search directly with out sorting the list since we know that the timestamps for a specific key will always be given in ascending order
+## 871. Minimum Number of Refueling Stops
+- Two possible solutons: dp or using a priority queue.
+- For DP solution we store the maximum distance we can travel with i stops at dp[i]
+- We compute dp[i+1] by going through all the stations and then going through the dp array in reverse from i to 0 and if the value of dp[i]>= to the current distance then update the value of dp[i+1] to be the max of dp[i+1] and the dp[i] + the amount of fuel at the current station. Go through the array in reverse since we are updating the value at i+1.
+- Time complexity = O(n^2), space complexity = O(n), where n is the number of stations.
+- For priority queue solution we use a priority queue to store the amount of fuel at all the stations we have passed so far but not used, we also keep track of the current fuel level, the previous distance we were at and the number of stops we have made.
+- Go through each station and subtract the distance between the current station and the previous station from the current fuel level.
+- If the current fuel level is less than 0 then we know we would have had to refuel at, at least one of the previous stations. The optimial station to choose is the one with the most fuel since it will take us the closest to the destination. Since we are using a priority queue to store the amount of fuel at the previous stations we can simply pop an element from the priority queue and add the amount of fuel to the current fuel level. 
+- Continue popping elements from the pq until the fuel level becomes greater than 0 or the pq is empty.
+- If the fuel level is still 0 after this then we know that we cannot reach the destination so we return -1.
+- Otherwise we add the negative of the current stations fuel to the pq and set prev to be the current distance.
+- Note: we add the negative of the fuel values to the pq since it is a min heap and we want the largest fuel values to be popped first.
+- Time complexity = O(nlogn), space complexity = O(n), where n is the number of stations.
