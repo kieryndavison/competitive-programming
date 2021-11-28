@@ -375,3 +375,25 @@ Get, set and setAll in o(1)
 - Otherwise we add the negative of the current stations fuel to the pq and set prev to be the current distance.
 - Note: we add the negative of the fuel values to the pq since it is a min heap and we want the largest fuel values to be popped first.
 - Time complexity = O(nlogn), space complexity = O(n), where n is the number of stations.
+## 465. Optimal Account Balancing
+- First calculate the balance for each person by adding their total if they receive money and subtracting their total if they give money.
+- Then convert the dictionary storing everyone's balance to a list of all the balances with balance != 0, called debt.
+- DFS on debt starting from index 0.
+- Find the first element with balance != 0
+- If there are no elements with balance != 0 then we know that everyone all debt has been settled and we return 0.
+- Otherwise go through all the values starting from index + 1 and if the value at debt[j] has opposite sign to the value at debt[index] then set d[j] += d[index] and recurse on index + 1.
+- After the recursion we backtrack and set d[j] -= d[index] so that we can use d[j] in a different combination of transactions.
+- Time complexity = O(n!), since we have to brute force try every combination, space complexity = O(n), since both the balances map and debt array have length n, where n is the number of people.
+## 410. Split Array Largest Sum
+- We can use binary search and a greedy approach to solve this problem.
+- We know that the largest sum among the m subarrays must be between the max value in the array and the sum of all the elements in the array. This is because the max value must be included in one of the subarrays and in the case where m = 1 we will include all values in one subarray.
+- With these constraints defined we can simply binary search with low = max(nums) and high = sum(nums).
+- At each iteration of the binary search we split the array into subarrays with sum <= mid. If the array is split into <= m subarrays then we know that the largest sum is <= mid, so we set high to mid.
+- Otherwise if there are > m subarrays then we know that the largest sum is > mid, so we set low to mid + 1.
+- In the end we return low but we could also return high since they are loop ends when they are the same value.
+- Time complexity = O(nlog(sum(array))), space complexity = O(1)
+## 1146. Snapshot Array
+- Basic approach store an array or arrays and each time we snapshot the array we copy the last array in the array of arrays and add it to the end.
+- However, we can optimize this approach to only add values if they are updated. Now we will have an array of pairs where the first element is the snapshot_id and the second element is the value of the array at that snapshot.
+- In get we binary search for the closest snapshot_id at array[index] that is less than or equal to the snapshot_id requested. 
+- Time complexity = O(log(s) + n), space complexity = O(s), where s is the number of times snap() is called and n is the length of the array.
