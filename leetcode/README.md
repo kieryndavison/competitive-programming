@@ -397,3 +397,9 @@ Get, set and setAll in o(1)
 - However, we can optimize this approach to only add values if they are updated. Now we will have an array of pairs where the first element is the snapshot_id and the second element is the value of the array at that snapshot.
 - In get we binary search for the closest snapshot_id at array[index] that is less than or equal to the snapshot_id requested. 
 - Time complexity = O(log(s) + n), space complexity = O(s), where s is the number of times snap() is called and n is the length of the array.
+## 1110. Delete Nodes And Return Forest
+- Fairly straight forward recursive approach. Go through and keep track of whether each node is a root. If it is a root and it is not deleted then we add it to the result. Then we recurse on the left and right children and update the left and right children based on the result of that recursion. Then we return None if the node was deleted and otherwise we return the node. Base case: if the current node is None then we return None. 
+- Runtime complexity = O(n), where n is the number of nodes in the tree, Space complexity = O(n + h), where h is the height of the tree.
+## 366. Find Leaves of Binary Tree
+- Simple recusive approach. Depends on height of a node = max(height of left child, height of right child) + 1. Use recursion to determine the height of each node and then insert the node into the result at its height. For example leaf nodes have height 0, so we insert them at index 0. Base case, if the node is None then return -1 since there is no height.
+- Runtime complexity = O(n), Space complexity = O(n), where n is the number of nodes in the tree.
