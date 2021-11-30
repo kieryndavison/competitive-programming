@@ -403,3 +403,16 @@ Get, set and setAll in o(1)
 ## 366. Find Leaves of Binary Tree
 - Simple recusive approach. Depends on height of a node = max(height of left child, height of right child) + 1. Use recursion to determine the height of each node and then insert the node into the result at its height. For example leaf nodes have height 0, so we insert them at index 0. Base case, if the node is None then return -1 since there is no height.
 - Runtime complexity = O(n), Space complexity = O(n), where n is the number of nodes in the tree.
+## 1937. Maximum Number of Points with Cost
+- Use a version of dp where we keep track of the max points from the left and right of the current index.
+- For each row we compute the max points from the left and right, where left[j] = max(left[j-1] - 1, points[i][j]) and right[j] = max(right[j+1] - 1, points[i][j]). Then we update the dp[i+1][j] to be points[i+1][j] + max(left[j], right[j]) where left and right are the max points from the left and right of the current index.
+- Optimization #1: Since the input (points) is already a 2d array we can use it to store our dp array. Although this does not reduce our space complexity it removes the need to copy the cur array into the pre array at each iteration of the outer loop and copying is generally expensive.
+- Optimization #2: We can actually reduce the space complexity to O(1) and have one less iteration of the elements in a row by updating dp[i+1][j] to be dp[i+1][j] + dp[i][j] in the loop to determine the left values. To do this we first loop through in reverse and update dp[i][j] to be the max(dp[i][j], dp[i][j+1] - 1) (aka computing the right values). Then we loop through and update dp[i][j] to be the max(dp[i][j], dp[i][j-1] - 1). Now we know that dp[i][j] is the max points from the left and right so we can directly set dp[i+1][j] += dp[i][j].
+- With no optimizations and optimization #1 we have Time complexity = O(n^2), Space complexity = O(m), where n is the number of points and m is the number of points in a row.
+- With optimization #2 we have Time complexity = O(n^2), Space complexity = O(1).
+## 2007. Find Original Array From Doubled Array
+- In python we can directly convert the array to a hashmap mapping each value to the number of times it appears using the collections.Counter() function.
+- We the loop through the map in sorted order and subtract the number of times each value appears from value * 2. Going through the loop in sorted order ensures that we only have to look for values with value * 2 not value / 2. In the case wher value == 0 then we subtract the number of times it occurs / 2 since 2 * 0 = 0.
+- If the number of times a value appears is more than the number of times value * 2 appears then we know that the array is not doubled so we return [].
+- In the end we return any values in the map which have a value > 0. We can use list(val.elements()) to get all numbers with val > 0.
+- Time complexity = O(n + klog(k)), Space complexity = O(n), where n is the number of elements in the array and k is the number of unique elements.
