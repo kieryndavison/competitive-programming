@@ -416,3 +416,14 @@ Get, set and setAll in o(1)
 - If the number of times a value appears is more than the number of times value * 2 appears then we know that the array is not doubled so we return [].
 - In the end we return any values in the map which have a value > 0. We can use list(val.elements()) to get all numbers with val > 0.
 - Time complexity = O(n + klog(k)), Space complexity = O(n), where n is the number of elements in the array and k is the number of unique elements.
+## 792. Number of Matching Subsequences
+- We can use a trie ish implemented as a dictionary which stores the current char we are looking for as the key and an iterator of the word pointing to the second character as the value.
+- Step one is to initialize the dictionary to store the first char of the word as the key and the iterator of the word as the value. To do this we loop through a map(iter, words) and set the key to be next(it) and the value to be it (since we set the key using next the value will be pointing to the second character in the word).
+- Step two loop through all the characters in the string, s, and then go through all the values at the character in the dictionary and insert next(it, None) = it into the dictionary. Use pop to get the the values in the dictionary at the current character, since the character should also be removed from the dictionary. If there is no next(it) then we will insert it at None.
+After completing the loop we return the len(dictionary[None]), since we insert an elements at None when the word has been fully iterated over (aka is a subsequece of s).
+## 552. Student Attendance Record II
+- There is a dp solution but it is more intiuitive and reduces space complexity to use a state machine approach.
+- Create a state machine and determine all the possible states that the student could be in based on if a P, L or A is added to the current state.
+- There should be 6 states: A0L0, A0L1, A0L2, A1L0, A1L1, A1L2. 
+- Go through the values from 1 - n and at each iteration update each state based on the previous states.
+- Time complexity = O(n), Space complexity = O(1).
